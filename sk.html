@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pleasant Tour Pakistan - Discover Natural Beauty</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            --primary: #0d9488;      /* Teal - represents water/nature */
+            --secondary: #dc2626;     /* Red - represents cultural heritage */
+            --accent: #f59e0b;        /* Amber - represents adventure/sun */
+            --light: #f0fdfa;         /* Light teal background */
+            --dark: #1f2937;          /* Dark gray for text */
+            --white: #ffffff;
+            --gray: #f3f4f6;
+            --shadow: 0 4px 20px rgba(13, 148, 136, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        /* ===== Reset & Base Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+
+        /* ===== Navbar ===== */
+        .navbar {
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #0c7a6f 100%);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-style: italic;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .navlink {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+        }
+
+        .navlink li {
+            position: relative;
+        }
+
+        .navlink li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 18px;
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: var(--transition);
+        }
+
+        .navlink li a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .navlink li a.active {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        #hamburger {
+            display: none;
+            font-size: 28px;
+            color: var(--white);
+            cursor: pointer;
+            background: var(--accent);
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        /* ===== Hero Section ===== */
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 85vh;
+            padding: 40px 5%;
+            gap: 50px;
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(13, 148, 136, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .leftside, .rightside {
+            position: relative;
+            z-index: 1;
+        }
+
+        .leftside {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .leftside .img {
+            border-radius: 20px;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+            border: 8px solid var(--white);
+            transition: var(--transition);
+        }
+
+        .leftside .img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(13, 148, 136, 0.25);
+        }
+
+        .rightside {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .name1 {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .name1 span {
+            color: var(--secondary);
+        }
+
+        .para {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #4b5563;
+        }
+
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+            background: linear-gradient(135deg, #b91c1c 0%, var(--secondary) 100%);
+        }
+
+        /* ===== About Section ===== */
+        .section-header {
+            text-align: center;
+            margin: 60px 0 40px;
+        }
+
+        .section-title {
+            display: inline-block;
+            font-size: 36px;
+            color: var(--primary);
+            padding: 10px 30px;
+            border-bottom: 3px solid var(--accent);
+            position: relative;
+        }
+
+        .section-title span {
+            color: var(--secondary);
+        }
+
+        .section-desc {
+            max-width: 800px;
+            margin: 20px auto 40px;
+            font-size: 18px;
+            color: #6b7280;
+            padding: 0 20px;
+        }
+
+        /* ===== Icons Section ===== */
+        .icons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 40px 5%;
+            background: var(--white);
+            border-radius: 20px;
+            margin: 0 5% 60px;
+            box-shadow: var(--shadow);
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+            background: var(--gray);
+            border-radius: 15px;
+            transition: var(--transition);
+            border-left: 5px solid var(--primary);
+        }
+
+        .icons:hover {
+            transform: translateY(-10px);
+            background: var(--white);
+            box-shadow: 0 10px 30px rgba(13, 148, 136, 0.15);
+        }
+
+        .icons img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            background: var(--white);
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .icons h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+
+        .icons span {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* ===== Popular Places ===== */
+        .places-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 5% 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            position: relative;
+            border: none;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(13, 148, 136, 0.2);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            color: var(--primary);
+            font-size: 22px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .card-text {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* ===== Reviews ===== */
+        .review-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 40px 5%;
+            background: linear-gradient(135deg, #f0fdfa 0%, #e0f2f1 100%);
+            margin: 60px 0;
+        }
+
+        .review {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 5px solid var(--primary);
+        }
+
+        .review:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(13, 148, 136, 0.2);
+        }
+
+        .stars {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #4b5563;
+            margin: 0;
+        }
+
+        .review-author {
+            margin-top: 15px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* ===== Contact Form ===== */
+        .contact-form-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* ===== Map ===== */
+        .map-container {
+    width: 100%;
+    height: 400px;
+    margin: 40px 5% 60px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: #e5e7eb;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+@media (max-width: 768px) {
+    .map-container {
+        height: 300px;
+        margin: 20px;
+    }
+}
+
+
+.footer{
+    width: 100%;
+    background: #0d9488;
+    color: #fff;
+    padding: 60px 0 20px;
+}
+
+/* inner content max-width */
+.footer-inner{
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footer-box h3{
+    font-size: 22px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.footer-box h3::after{
+    content: "";
+    width: 50px;
+    height: 3px;
+    background: #f59e0b;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+}
+
+.footer-box p{
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.footer-box ul{
+    list-style: none;
+    padding: 0;
+}
+
+.footer-box ul li{
+    margin-bottom: 10px;
+}
+
+.footer-box ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-box ul li a:hover{
+    color: #f59e0b;
+}
+
+/* Social icons */
+.social-icons{
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a{
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.social-icons a:hover{
+    background: #f59e0b;
+    transform: translateY(-5px);
+}
+
+/* bottom bar */
+.footer-bottom{
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 14px;
+}
+
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 992px) {
+            .main {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 5%;
+            }
+            
+            .name1 {
+                font-size: 36px;
+            }
+            
+            .leftside .img {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navlink {
+                flex-direction: column;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 20px;
+                display: none;
+                z-index: 1000;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            }
+            
+            .navlink.show {
+                display: flex;
+            }
+            
+            #hamburger {
+                display: block;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .contact-form-container {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 22px;
+            }
+            
+            .name1 {
+                font-size: 28px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+            
+            .places-container {
+                grid-template-columns: 1fr;
+            }
+        }
+          .places-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .card {
+    width: 18rem;
+    cursor: pointer; /* poora card clickable dikhaye */
+    transition: transform 0.2s;
+  }
+  .card:hover {
+    transform: scale(1.05); /* hover effect thoda zoom */
+  }
+  .card-badge {
+    position: absolute;
+    background: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
+    z-index: 1;
+  }
+  .card img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+    </style>
+</head>
+<script>
+    function toggleNav() {
+        const nav = document.getElementById("nav");
+        nav.classList.toggle("show");
+    }
+</script>
+
+<body>
+    
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">
+        <i class="fas fa-mountain"></i>
+        <h1>Pleasant <span style="color:var(--accent)">Tour</span></h1>
+    </div>
+    <ul class="navlink" id="nav">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#places">Places</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <i class="fas fa-bars" id="hamburger" onclick="toggleNav()"></i>
+</nav>
+
+<!-- Hero Section -->
+<section class="main" id="home">
+    <div class="leftside">
+        <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img" alt="Pakistan's Natural Beauty">
+    </div>
+    <div class="rightside">
+        <h1 class="name1">Discover the <span>Beauty</span> of Pakistan</h1>
+        <p class="para">Embark on unforgettable journeys across Pakistan's breathtaking mountains, peaceful valleys, rich culture, and timeless heritage. Experience adventure like never before with our expertly crafted tours.</p>
+       
+    </div>
+</section>
+
+<!-- About Section -->
+<div class="container" id="about">
+    <div class="section-header">
+        <h2 class="section-title">About <span>Us</span></h2>
+        <p class="section-desc">Pleasant Tour Pakistan is a professional travel company dedicated to creating memorable and comfortable travel experiences. From relaxing escapes to adventurous mountain trips, we handle every detail so you can enjoy the journey.</p>
+    </div>
+</div>
+
+<!-- Features Section -->
+<section class="icons-container">
+    <div class="icons">
+        <img src="https://cdn-icons-png.flaticon.com/512/3058/3058977.png" alt="Easy Booking">
+        <div>
+            <h3>Easy Booking</h3>
+            <span>Online & Offline Reservations</span>
+        </div>
+    </div>
+    <div class="icons">
+        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Money Back">
+        <div>
+            <h3>10 Days Returns</h3>
+            <span>Money-back Guarantee</span>
+        </div>
+    </div>
+    <div class="icons">
+        <img src="https://cdn-icons-png.flaticon.com/512/2177/2177239.png" alt="Special Offers">
+        <div>
+            <h3>Special Offers</h3>
+            <span>Seasonal Discounts & Gifts</span>
+        </div>
+    </div>
+    <div class="icons">
+        <img src="https://cdn-icons-png.flaticon.com/512/272/272354.png" alt="Secure Payment">
+        <div>
+            <h3>Secure Payment</h3>
+            <span>Protected & Trusted</span>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Places -->
+<div class="container" id="places">
+    <div class="section-header">
+        <h2 class="section-title">Popular <span>Places</span></h2>
+        <p class="section-desc">Pakistan is blessed with natural beauty and diverse landscapes. Discover amazing mountains, valleys, rivers, and historic sites.</p>
+    </div>
+    
+    
+<h2 class="text-center mt-4">Popular Places</h2>
+
+<div class="places-container">
+
+<!-- Murree -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Murree Hills"
+data-img="https://www.getout.pk/pakistan/wp-content/uploads/2018/12/The-Murree-city-Kashmir-Point-Pakistan.-Image.png"
+data-desc="A famous hill station known for cool weather, pine forests, and breathtaking mountain views. Perfect for family trips and weekend escapes.">
+<div class="card-badge">Most Popular</div>
+<img src="https://www.getout.pk/pakistan/wp-content/uploads/2018/12/The-Murree-city-Kashmir-Point-Pakistan.-Image.png">
+<div class="card-body"><h5>Murree Hills</h5></div>
+</div>
+
+<!-- Naran -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Naran Valley"
+data-img="https://images.unsplash.com/photo-1528164344705-47542687000d"
+data-desc="A stunning valley surrounded by snow-capped peaks, crystal lakes, and adventurous hiking routes. A paradise for nature lovers.">
+<img src="https://images.unsplash.com/photo-1528164344705-47542687000d">
+<div class="card-body"><h5>Naran Valley</h5></div>
+</div>
+
+<!-- Kaghan -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Kaghan Valley"
+data-img="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+data-desc="A peaceful valley featuring clear rivers, lush green meadows, and scenic landscapes that offer a truly relaxing experience.">
+<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
+<div class="card-body"><h5>Kaghan Valley</h5></div>
+</div>
+
+<!-- Swat -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Swat Valley"
+data-img="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b"
+data-desc="Often called the Switzerland of Pakistan, Swat is famous for its lush greenery, rivers, waterfalls, and cultural heritage.">
+<div class="card-badge">Adventure</div>
+<img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b">
+<div class="card-body"><h5>Swat Valley</h5></div>
+</div>
+
+<!-- Saif ul Malook -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Saif-ul-Malook"
+data-img="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1"
+data-desc="A legendary alpine lake surrounded by towering mountains, famous for its fairy-tale beauty and crystal-clear water.">
+<img src="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1">
+<div class="card-body"><h5>Saif-ul-Malook</h5></div>
+</div>
+
+<!-- Hunza -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Hunza Valley"
+data-img="https://images.unsplash.com/photo-1464278533981-50106e6176b1"
+data-desc="A breathtaking valley known for majestic mountains, rich culture, and some of the most beautiful views in northern Pakistan.">
+<img src="https://images.unsplash.com/photo-1464278533981-50106e6176b1">
+<div class="card-body"><h5>Hunza Valley</h5></div>
+</div>
+
+<!-- Skardu -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Skardu"
+data-img="https://rozefstourism.com/wp-content/uploads/2025/01/sarfaranga-desert-skardu.webp"
+data-desc="A dream destination offering turquoise lakes, dramatic mountains, and access to the world’s highest peaks and glaciers.">
+<div class="card-badge">Nature</div>
+<img src="https://rozefstourism.com/wp-content/uploads/2025/01/sarfaranga-desert-skardu.webp">
+<div class="card-body"><h5>Skardu</h5></div>
+</div>
+
+<!-- Fairy Meadows -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Fairy Meadows"
+data-img="https://assets.explore-share.com/trips/556580/photos/1724352575-fairy-meadows-2.jpeg"
+data-desc="A magical green plateau offering unforgettable views of Nanga Parbat, ideal for camping, hiking, and adventure lovers.">
+<div class="card-badge">Adventure</div>
+<img src="https://assets.explore-share.com/trips/556580/photos/1724352575-fairy-meadows-2.jpeg">
+<div class="card-body"><h5>Fairy Meadows</h5></div>
+</div>
+
+<!-- Khunjerab -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Khunjerab Pass"
+data-img="https://startuppakistan.com.pk/wp-content/uploads/2025/10/khunjerab-ozbgzjq4rl2afq9dtkdm022k3akrxos2p99sv2ta5o.jpg"
+data-desc="The highest paved international border crossing in the world, known for dramatic landscapes and rare wildlife.">
+<div class="card-badge">Extreme</div>
+<img src="https://startuppakistan.com.pk/wp-content/uploads/2025/10/khunjerab-ozbgzjq4rl2afq9dtkdm022k3akrxos2p99sv2ta5o.jpg">
+<div class="card-body"><h5>Khunjerab Pass</h5></div>
+</div>
+
+<!-- Attabad -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Attabad Lake"
+data-img="https://explorepakistantours.pk/wp-content/uploads/2025/04/Attabad-Lake-Hunza-Valley.webp"
+data-desc="A stunning turquoise lake formed after a natural landslide, now one of the most iconic attractions of Hunza Valley.">
+<div class="card-badge">Nature</div>
+<img src="https://explorepakistantours.pk/wp-content/uploads/2025/04/Attabad-Lake-Hunza-Valley.webp">
+<div class="card-body"><h5>Attabad Lake</h5></div>
+</div>
+
+<!-- Ratti Gali -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Ratti Gali Lake"
+data-img="https://s1.wklcdn.com/image_169/5075682/178067680/110951089Master.jpg"
+data-desc="A mesmerizing alpine lake surrounded by green meadows and snow-covered peaks, offering a peaceful escape into nature.">
+<div class="card-badge">Nature</div>
+<img src="https://s1.wklcdn.com/image_169/5075682/178067680/110951089Master.jpg">
+<div class="card-body"><h5>Ratti Gali Lake</h5></div>
+</div>
+
+<!-- Deosai -->
+<div class="card" data-bs-toggle="modal" data-bs-target="#placeModal"
+data-title="Deosai Plains"
+data-img="https://www.royaladventurepakistan.com/wp-content/uploads/2022/04/deosai-national-park-pakistan.jpg"
+data-desc="One of the highest plateaus in the world, famous for vast landscapes, colorful wildflowers, and unique wildlife.">
+<div class="card-badge">Mountains</div>
+<img src="https://www.royaladventurepakistan.com/wp-content/uploads/2022/04/deosai-national-park-pakistan.jpg">
+<div class="card-body"><h5>Deosai Plains</h5></div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="placeModal" tabindex="-1">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<h5 id="modalTitle"></h5>
+<button class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body">
+<img id="modalImg" class="img-fluid rounded mb-3">
+<p id="modalDesc"></p>
+</div>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.querySelectorAll('.card').forEach(card=>{
+ card.addEventListener('click',()=>{
+  modalTitle.innerText = card.dataset.title;
+  modalImg.src = card.dataset.img;
+  modalDesc.innerText = card.dataset.desc;
+ });
+});
+</script>
+
+<!-- Reviews Section -->
+<section class="review-container" id="reviews">
+    <div class="review">
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <p>"An unforgettable experience! The guides were knowledgeable and the scenery was breathtaking."</p>
+        <div class="review-author">- Sabeen M.</div>
+    </div>
+    
+    <div class="review">
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+        </div>
+        <p>"Well organized trips that exceeded our expectations. Can't wait to travel with them again!"</p>
+        <div class="review-author">- Ali R.</div>
+    </div>
+    
+    <div class="review">
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <p>"Loved every moment! From booking to the actual tour, everything was seamless and enjoyable."</p>
+        <div class="review-author">- Nafees A.</div>
+    </div>
+    <div class="review">
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <p>"Tours help us explore new places and learn about different cultures. Every tour creates memories that last a lifetime.
+            ."</p>
+        <div class="review-author">- mameer A.</div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<div class="container" id="contact">
+    <div class="section-header">
+        <h2 class="section-title">Contact <span>Us</span></h2>
+        <p class="section-desc">Have questions or want to plan your trip? Reach out to us! We're here to help you plan your perfect adventure.</p>
+    </div>
+    
+    <div class="contact-form-container">
+        <form id="contactForm">
+            <input type="text" class="form-control" name="name" placeholder="Your Full Name" required>
+            <input type="email" class="form-control" name="email" placeholder="Your Email Address" required>
+            <input type="text" class="form-control" name="subject" placeholder="Tour Package Interest" required>
+            <textarea class="form-control" name="message" placeholder="Tell us about your dream trip..." required></textarea>
+            <button class="btn" type="submit" style="width: 100%;">
+                <i class="fas fa-paper-plane"></i>
+                SEND MESSAGE
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Map Section -->
+<section id="map">
+  <div class="map-container">
+    <iframe
+      src="https://maps.google.com/maps?q=Karachi%20Pakistan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+      loading="eager"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+
+    <div class="footer-box">
+            <h3>Pleasant Tour Pakistan</h3>
+            <p>Explore the beauty of Pakistan with our expertly guided tours. Adventure, culture, and unforgettable memories await!</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/?hl=en"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+   <div class="footer-box">
+            <h3>Quick Links</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="#home" style="color: rgba(255,255,255,0.9); text-decoration: none; display: block; margin-bottom: 10px;">Home</a></li>
+                <li><a href="#about" style="color: rgba(255,255,255,0.9); text-decoration: none; display: block; margin-bottom: 10px;">About Us</a></li>
+                <li><a href="#places" style="color: rgba(255,255,255,0.9); text-decoration: none; display: block; margin-bottom: 10px;">Tour Packages</a></li>
+                <li><a href="#contact" style="color: rgba(255,255,255,0.9); text-decoration: none; display: block; margin-bottom: 10px;">Contact</a></li>
+            </ul>
+        </div>
+        
+            <div class="footer-box">
+      <h3>Contact Info</h3>
+      <p>📍 Karachi, Pakistan</p>
+      <p>📞 +92 300 1234567</p>
+      <p>✉ info@pleas</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Pleasant Tour Pakistan | All Rights Reserved
+  </div>
+</footer>
+index (1).html
+Displaying index (1).html.
